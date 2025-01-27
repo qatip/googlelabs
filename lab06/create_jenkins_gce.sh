@@ -1,18 +1,18 @@
 #!/bin/bash
 
 # Variables
-PROJECT_ID="qwiklabs-gcp-02-3171e8c261f7"
+PROJECT_ID="<Your lab project id>"
 REGION="us-west1"
 ZONE="us-west1-a"
-NETWORK_NAME="lab6-network"
-SUBNET_NAME="lab6-subnet"
-FIREWALL_RULE_NAME="lab6-firewall"
+NETWORK_NAME="jenkins-network"
+SUBNET_NAME="jenkins-subnet"
+FIREWALL_RULE_NAME="jenkins-firewall"
 INSTANCE_NAME="jenkins-instance"
 MACHINE_TYPE="e2-small"
 IMAGE_PROJECT="ubuntu-os-cloud"
 IMAGE_FAMILY="ubuntu-2204-lts"
 TAGS="http-server,https-server"
-SERVICE_ACCOUNT="qwiklabs-gcp-02-3171e8c261f7@qwiklabs-gcp-02-3171e8c261f7.iam.gserviceaccount.com"
+SERVICE_ACCOUNT="<Your lab project id>@<Your lab project id>.iam.gserviceaccount.com"
 
 # Enable required APIs
 echo "Enabling required APIs..."
