@@ -52,7 +52,7 @@ gcloud compute instances create $INSTANCE_NAME \
     --image-family=$IMAGE_FAMILY \
     --image-project=$IMAGE_PROJECT \
     --service-account=$SERVICE_ACCOUNT \
-    --metadata-from-file startup-script=startup-script.sh \
+    --metadata-from-file startup-script=jenkins_startup_script.sh \
     --project=$PROJECT_ID
 
 # Wait for the instance to initialize
