@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-PROJECT_ID="qwiklabs-gcp-00-ac3b459a13f1"
+PROJECT_ID="<your lab project id>"
 REGION="us-west1"
 ZONE="us-west1-a"
 NETWORK_NAME="jenkins-network"
@@ -12,7 +12,7 @@ MACHINE_TYPE="e2-small"
 IMAGE_PROJECT="ubuntu-os-cloud"
 IMAGE_FAMILY="ubuntu-2204-lts"
 TAGS="http-server,https-server"
-SERVICE_ACCOUNT="qwiklabs-gcp-00-ac3b459a13f1@qwiklabs-gcp-00-ac3b459a13f1.iam.gserviceaccount.com"
+SERVICE_ACCOUNT="<your lab project id>@<your lab project id>.iam.gserviceaccount.com"
 
 # Enable required APIs
 echo "Enabling required APIs..."
@@ -56,8 +56,13 @@ gcloud compute instances create $INSTANCE_NAME \
     --project=$PROJECT_ID
 
 # Wait for the instance to initialize
-echo "Waiting for the instance to initialize..."
-sleep 300
+echo "Waiting 6 minutes for the instance to fully initialize. Please be patient..."
+for i in {6..1}; do
+    echo "Still waiting... $i minute(s) remaining."
+    sleep 60
+done
+echo "Initialization wait complete. Proceeding with the next steps..."
+
 
 # Retrieve External IP Address
 INSTANCE_IP=$(gcloud compute instances describe $INSTANCE_NAME \
@@ -67,6 +72,27 @@ INSTANCE_IP=$(gcloud compute instances describe $INSTANCE_NAME \
 
 echo "Instance is accessible at IP: http://$INSTANCE_IP:8080"
 
-# Display Jenkins admin password
+# Retrieve the active SSH username dynamically
+echo "Detecting SSH username..."
+SSH_USER=$(gcloud compute ssh $INSTANCE_NAME --zone=$ZONE --project=$PROJECT_ID --dry-run | grep -oP '(?<=@)[^ ]+')
+
+# Retrieve Jenkins admin password with retry logic
 echo "Retrieving Jenkins admin password..."
-gcloud compute ssh ubuntu@$INSTANCE_NAME --zone=$ZONE --command="cat /home/ubuntu/jenkins_admin_password.txt" --project=$PROJECT_ID
+for i in {1..5}; do
+    PASSWORD=$(gcloud compute ssh $SSH_USER@$INSTANCE_NAME \
+        --zone=$ZONE \
+        --command="sudo cat /home/ubuntu/jenkins_admin_password.txt" \
+        --project=$PROJECT_ID 2>/dev/null)
+    
+    if [[ -n "$PASSWORD" ]]; then
+        echo "Jenkins Initial Admin Password: $PASSWORD"
+        break
+    else
+        echo "Password file not found. Retrying in 30 seconds..."
+        sleep 30
+    fi
+done
+
+if [[ -z "$PASSWORD" ]]; then
+    echo "Failed to retrieve the Jenkins admin password. Check the instance logs for issues."
+fi

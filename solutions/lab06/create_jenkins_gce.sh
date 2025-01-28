@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-PROJECT_ID="<Your lab project id>"
+PROJECT_ID="<your lab project id>"
 REGION="us-west1"
 ZONE="us-west1-a"
 NETWORK_NAME="jenkins-network"
@@ -12,7 +12,7 @@ MACHINE_TYPE="e2-small"
 IMAGE_PROJECT="ubuntu-os-cloud"
 IMAGE_FAMILY="ubuntu-2204-lts"
 TAGS="http-server,https-server"
-SERVICE_ACCOUNT="<Your lab project id>@<Your lab project id>.iam.gserviceaccount.com"
+SERVICE_ACCOUNT="<your lab project id>@<your lab project id>.iam.gserviceaccount.com"
 
 # Enable required APIs
 echo "Enabling required APIs..."
