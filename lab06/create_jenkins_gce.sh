@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-PROJECT_ID="<Your lab project id>"
+PROJECT_ID="qwiklabs-gcp-00-ac3b459a13f1"
 REGION="us-west1"
 ZONE="us-west1-a"
 NETWORK_NAME="jenkins-network"
@@ -12,7 +12,7 @@ MACHINE_TYPE="e2-small"
 IMAGE_PROJECT="ubuntu-os-cloud"
 IMAGE_FAMILY="ubuntu-2204-lts"
 TAGS="http-server,https-server"
-SERVICE_ACCOUNT="<Your lab project id>@<Your lab project id>.iam.gserviceaccount.com"
+SERVICE_ACCOUNT="qwiklabs-gcp-00-ac3b459a13f1@qwiklabs-gcp-00-ac3b459a13f1.iam.gserviceaccount.com"
 
 # Enable required APIs
 echo "Enabling required APIs..."
