@@ -1,5 +1,5 @@
 provider "google" {
-  project = "<your-lab-project-id>"  # Replace with your GCP project ID
+  project = "<your project id>"  # Replace with your GCP project ID
   region  = "us-west1"            # Replace with your desired GCP region
 }
 
