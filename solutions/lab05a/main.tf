@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     google = {
-      source  = "hashicorp/google"
+      source = "hashicorp/google"
       version = "6.17.0"
     }
   }
@@ -15,12 +15,11 @@ module "vpc" {
   source = "./network"
 }
 
-
 terraform {
   backend "gcs" {
-    bucket = "tf-remote-state-michael" # Replace {your-name} with your unique identifier
-    prefix = "terraform/state"         # Path within the bucket for the state file
+    bucket = "tf-remote-state-<YOUR NAME>"  # Replace <YOUR NAME> with your unique identifier
+    prefix = "terraform/state"              # Path within the bucket for the state file
   }
+
+
 }
-
-
