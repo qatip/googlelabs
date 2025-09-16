@@ -15,12 +15,11 @@ module "vpc" {
   source = "./network"
 }
 
-
-terraform {
-  backend "gcs" {
-    bucket = "tf-remote-state-michael" # Replace {your-name} with your unique identifier
-    prefix = "terraform/state"         # Path within the bucket for the state file
-  }
-}
+#terraform {
+#  backend "gcs" {
+#    bucket = "tf-remote-state-michael" # Replace {your-name} with your unique identifier
+#    prefix = "terraform/state"         # Path within the bucket for the state file
+#  }
+#}
 
 

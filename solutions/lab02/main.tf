@@ -23,9 +23,9 @@ resource "google_compute_instance" "default" {
 
   boot_disk {
     initialize_params {
-#      image = "debian-cloud/debian-11"
-      image = "ubuntu-os-cloud/ubuntu-2004-lts"
-      
+      image = "debian-cloud/debian-11"
+#      image = "ubuntu-minimal-2404-noble-amd64-v20250725"
+   
       labels = {
         my_label = "value"
       }

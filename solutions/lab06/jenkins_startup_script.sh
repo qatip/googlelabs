@@ -35,15 +35,3 @@ echo "Configuring sudo permissions for Jenkins..." | sudo tee -a $LOG_FILE
 echo "jenkins ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/jenkins
 sudo chmod 440 /etc/sudoers.d/jenkins
 
-# --- Emit Jenkins initial admin password to serial console (no SSH required) ---
-echo "Waiting for Jenkins initial admin password..." | sudo tee -a $LOG_FILE
-for i in {1..360}; do  # up to ~30 minutes
-  if [[ -s /var/lib/jenkins/secrets/initialAdminPassword ]]; then
-    PW="$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)"
-    echo "JENKINS_INITIAL_ADMIN_PASSWORD:$PW" | sudo tee -a $LOG_FILE
-    # Write to serial console (GCE port 1 is /dev/ttyS0)
-    echo "JENKINS_INITIAL_ADMIN_PASSWORD:$PW" | sudo tee /dev/ttyS0 > /dev/null 2>&1 || true
-    break
-  fi
-  sleep 5
-done
